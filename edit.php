@@ -28,7 +28,7 @@ if (isset($code)) {
 	// store user access token
 	$instagram->setAccessToken($data);
 	$result = $instagram->getUserMedia();
-gi	// now you have access to all authenticated user methods
+	// now you have access to all authenticated user methods
 } else {
 	// check whether an error occurred
 	if (isset($_SESSION['error'])) {
@@ -59,7 +59,6 @@ gi	// now you have access to all authenticated user methods
 			<?php
 				foreach ($result->data as $media) {
 					$id = $media->id;
-					echo "$id == ".$_GET['id']."<br>";
 					if ($id == $_GET['id']) {
 						$content = '<li>';
 						// output media
