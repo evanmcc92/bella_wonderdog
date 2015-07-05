@@ -19,8 +19,7 @@ $instagram = new Instagram(array(
 ));
 
 // receive OAuth code parameter
-$code = $_GET['code'];
-$_SESSION['code'] = $code;
+$code = $_SESSION['code'];
 
 // check whether the user has granted access
 if (isset($code)) {
@@ -33,10 +32,8 @@ if (isset($code)) {
     $result = $instagram->getUserMedia();
 } else {
     // check whether an error occurred
-    if (isset($_GET['error'])) {
-        $_SESSION['error'] = $_GET['error'];
-        $_SESSION['error_description'] = $_GET['error_description'];
-        echo 'An error occurred: ' . $_GET['error_description'];
+    if (isset($_SESSION['error'])) {
+        echo 'An error occurred: ' . $_SESSION['error_description'];
     }
 }
 
