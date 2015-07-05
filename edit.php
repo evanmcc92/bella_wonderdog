@@ -79,7 +79,7 @@ if (isset($code)) {
 						echo $content . '</li></ul>';
 						foreach ($media->tags as $tag) {
 							echo "$tag";
-							$tagnewmedia = $instagram->getTagMedia($tag,25);
+							$tagnewmedia = $instagram->getTagMedia($tag);
 							$x = 0;
 							foreach ($tagmedia->data as $tagmedia) {
 								$x++;
