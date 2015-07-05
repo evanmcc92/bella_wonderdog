@@ -89,11 +89,12 @@ if (isset($code)) {
 									break;
 								} else {
 									$mediaid = $tagmedia->id;
-									if (likeMedia($mediaid)) {
+									likeMedia($mediaid);
 										echo "<li>$mediaid</li>";
 										exit();
-									}
+										sleep(rand(15,30));
 								}
+								sleep(seconds)
 							}
 							echo "</ol></li>";
 						}
