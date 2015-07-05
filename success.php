@@ -35,6 +35,12 @@ if (isset($code)) {
     if (isset($_GET['error'])) {
         echo 'An error occurred: ' . $_GET['error_description'];
     }
+            // display all user likes
+            foreach ($result->data as $media) {
+                echo "<pre>";
+                print_r($media);
+                exit();
+            }
 }
 
 ?>
@@ -60,9 +66,6 @@ if (isset($code)) {
             <?php
             // display all user likes
             foreach ($result->data as $media) {
-                echo "<pre>";
-                print_r($media);
-                exit();
                 $content = '<li>';
                 // output media
                 if ($media->type === 'video') {
