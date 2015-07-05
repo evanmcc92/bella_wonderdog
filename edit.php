@@ -82,7 +82,7 @@ if (isset($code)) {
 						echo "<pre>";
 						echo "<ol>";
 						foreach ($media->tags as $tag) {
-							echo "<li>$tag<ol>";
+							echo "<li>$tag<ul class=\"grid\">";
 							$tagnewmedia = $instagram->getTagMedia($tag);
 							$x = 0;
 							foreach ($tagnewmedia->data as $tagmedia) {
@@ -92,13 +92,41 @@ if (isset($code)) {
 								} else {
 									$mediaid = $tagmedia->id;
 									$instagram->likeMedia($mediaid);
-										echo "<li>$mediaid</li>";
-										// sleep(rand(15,30));
+									$content = '<li class="li">';
+									// output media
+									if ($tagmedia->type === 'video') {
+										// video
+										$poster = $tagmedia->images->low_resolution->url;
+										$source = $tagmedia->videos->standard_resolution->url;
+										$content .= "<video class=\"tagmedia video-js vjs-default-skin\" width=\"250\" height=\"250\" poster=\"{$poster}\"
+											   data-setup='{\"controls\":true, \"preload\": \"auto\"}'>
+												 <source src=\"{$source}\" type=\"video/mp4\" />
+											   </video>";
+									} else {
+										// image
+										$image = $tagmedia->images->low_resolution->url;
+										$content .= "<img class=\"tagmedia\" src=\"{$image}\"/>";
+									}
+									// create meta section
+									$avatar = $tagmedia->user->profile_picture;
+									$username = $tagmedia->user->username;
+									$comment = $tagmedia->caption->text;
+									$instagramlink = $tagmedia->link;
+									$content .= "<div class=\"content\">
+											   <div class=\"avatar\" style=\"background-image: url({$avatar})\"></div>
+											   <p>{$username}</p>
+											   <div class=\"comment\">{$comment}</div>
+											   <div><a href='$instagramlink'>Instagram Link</a></div>
+											 </div>";
+									// output media
+									echo $content . '</li>';
+									// sleep(rand(15,30));
+									exit();
 								}
 							}
-										exit();
-								sleep(10);
-							echo "</ol></li>";
+							sleep(10);
+							echo "</ul></li>";
+							exit();
 						}
 						echo "</ol>";
 					}
@@ -106,5 +134,20 @@ if (isset($code)) {
 			?>
 	</div>
 </div>
+<script>
+	$(document).ready(function () {
+		// rollover effect
+		$('.li').hover(
+			function () {
+				var $media = $(this).find('.media');
+				var height = $media.height();
+				$media.stop().animate({marginTop: -(height - 82)}, 1000);
+			}, function () {
+				var $media = $(this).find('.media');
+				$media.stop().animate({marginTop: '0px'}, 1000);
+			}
+		);
+	});
+</script>
 </body>
 </html>
