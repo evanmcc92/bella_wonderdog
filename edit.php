@@ -77,41 +77,17 @@ if (isset($code)) {
 				$username = $media->user->username;
 				$comment = $media->caption->text;
 				$id = $media->id;
+				// output media
+				echo $content . '</li>';
 				foreach ($media->tags as $tags) {
 					$tagmedia = $instagram->getTagMedia($tag);
 					echo "<pre>";
 					print_r($tagmedia);
 					exit();
 				}
-				// output media
-				echo $content . '</li>';
 			?>
 		</ul>
-		<!-- GitHub project -->
-		<footer>
-			<p>created by <a href="https://github.com/cosenary/Instagram-PHP-API">cosenary's Instagram class</a>,
-				available on GitHub</p>
-			<iframe width="95px" scrolling="0" height="20px" frameborder="0" allowtransparency="true"
-					src="http://ghbtns.com/github-btn.html?user=cosenary&repo=Instagram-PHP-API&type=fork&count=true"></iframe>
-		</footer>
 	</div>
 </div>
-<!-- javascript -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>
-	$(document).ready(function () {
-		// rollover effect
-		$('li').hover(
-			function () {
-				var $media = $(this).find('.media');
-				var height = $media.height();
-				$media.stop().animate({marginTop: -(height - 82)}, 1000);
-			}, function () {
-				var $media = $(this).find('.media');
-				$media.stop().animate({marginTop: '0px'}, 1000);
-			}
-		);
-	});
-</script>
 </body>
 </html>

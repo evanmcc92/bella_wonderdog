@@ -59,13 +59,6 @@ $result = $instagram->getPopularMedia();
 			}
 			?>
 		</ul>
-		<!-- GitHub project -->
-		<footer>
-			<p>created by <a href="https://github.com/cosenary/Instagram-PHP-API">cosenary's Instagram class</a>,
-				available on GitHub</p>
-			<iframe width="95px" scrolling="0" height="20px" frameborder="0" allowtransparency="true"
-					src="http://ghbtns.com/github-btn.html?user=cosenary&repo=Instagram-PHP-API&type=fork&count=true"></iframe>
-		</footer>
 	</div>
 </div>
 <!-- javascript -->

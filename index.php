@@ -44,10 +44,6 @@ $loginUrl = $instagram->getLoginUrl();
 				<h4>Use your Instagram account to login.</h4>
 			</li>
 		</ul>
-		<!-- GitHub project -->
-		<footer>
-			<p>created by <a href="https://github.com/cosenary/Instagram-PHP-API">cosenary's Instagram class</a>, available on GitHub</p>
-		</footer>
 	</div>
 </div>
 </body>
