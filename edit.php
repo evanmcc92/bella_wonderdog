@@ -17,7 +17,8 @@ $instagram = new Instagram(array(
     'apiSecret' => 'f55117ae3ed24495a6ece2125b6de98f',
     'apiCallback' => 'https://pacific-journey-4584.herokuapp.com/success.php' // must point to success.php
 ));
-
+print_r($_SESSION);
+exit();
 // receive OAuth code parameter
 $code = $_SESSION['code'];
 
