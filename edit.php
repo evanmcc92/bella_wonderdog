@@ -91,21 +91,21 @@ if (isset($code)) {
 									break;
 								} else {
 									$mediaid = $tagmedia->id;
-									$instagram->likeMedia($mediaid);
+									// $instagram->likeMedia($mediaid);
 									$content = '<li class="li">';
 									// output media
 									if ($tagmedia->type === 'video') {
 										// video
 										$poster = $tagmedia->images->low_resolution->url;
 										$source = $tagmedia->videos->standard_resolution->url;
-										$content .= "<video class=\"tagmedia video-js vjs-default-skin\" width=\"250\" height=\"250\" poster=\"{$poster}\"
-											   data-setup='{\"controls\":true, \"preload\": \"auto\"}'>
-												 <source src=\"{$source}\" type=\"video/mp4\" />
-											   </video>";
+										$content .= "<video class=\"media video-js vjs-default-skin\" width=\"250\" height=\"250\" poster=\"{$poster}\"
+												data-setup='{\"controls\":true, \"preload\": \"auto\"}'>
+													<source src=\"{$source}\" type=\"video/mp4\" />
+												</video>";
 									} else {
 										// image
 										$image = $tagmedia->images->low_resolution->url;
-										$content .= "<img class=\"tagmedia\" src=\"{$image}\"/>";
+										$content .= "<img class=\"media\" src=\"{$image}\"/>";
 									}
 									// create meta section
 									$avatar = $tagmedia->user->profile_picture;
@@ -113,11 +113,11 @@ if (isset($code)) {
 									$comment = $tagmedia->caption->text;
 									$instagramlink = $tagmedia->link;
 									$content .= "<div class=\"content\">
-											   <div class=\"avatar\" style=\"background-image: url({$avatar})\"></div>
-											   <p>{$username}</p>
-											   <div class=\"comment\">{$comment}</div>
-											   <div><a href='$instagramlink'>Instagram Link</a></div>
-											 </div>";
+												<div class=\"avatar\" style=\"background-image: url({$avatar})\"></div>
+												<p>{$username}</p>
+												<div class=\"comment\">{$comment}</div>
+												<div><a href='$instagramlink'>Instagram Link</a></div>
+											</div>";
 									// output media
 									echo $content . '</li>';
 									// sleep(rand(15,30));
