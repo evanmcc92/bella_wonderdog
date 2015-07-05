@@ -94,7 +94,7 @@ if (isset($code)) {
 										exit();
 										sleep(rand(15,30));
 								}
-								sleep(seconds)
+								sleep(10);
 							}
 							echo "</ol></li>";
 						}
