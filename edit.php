@@ -50,9 +50,11 @@ if (isset($code)) {
 <body>
 <div class="container">
 	<header class="clearfix">
-		<img src="assets/instagram.png" alt="Instagram logo">
+		<a href="index.php">
+			<img src="assets/instagram.png" alt="Instagram logo">
 
-		<h1>Instagram photos <span>taken by <?php echo $data->user->username ?></span></h1>
+			<h1>Instagram photos <span>taken by <?php echo $data->user->username ?></span></h1>
+		</a>
 	</header>
 	<div class="main">
 		<ul class="grid">
@@ -91,9 +93,9 @@ if (isset($code)) {
 									$mediaid = $tagmedia->id;
 									$instagram->likeMedia($mediaid);
 										echo "<li>$mediaid</li>";
-										exit();
-										sleep(rand(15,30));
+										// sleep(rand(15,30));
 								}
+										exit();
 								sleep(10);
 							}
 							echo "</ol></li>";

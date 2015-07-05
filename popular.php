@@ -22,9 +22,11 @@ $result = $instagram->getPopularMedia();
 <body>
 <div class="container">
 	<header class="clearfix">
-		<img src="assets/instagram.png" alt="Instagram logo">
+		<a href="index.php">
+			<img src="assets/instagram.png" alt="Instagram logo">
 
-		<h1>Instagram <span>popular photos</span></h1>
+			<h1>Instagram <span>popular photos</span></h1>
+		</a>
 	</header>
 	<div class="main">
 		<ul class="grid">
