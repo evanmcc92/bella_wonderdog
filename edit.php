@@ -23,7 +23,7 @@ $code = $_SESSION['code'];
 // check whether the user has granted access
 if (isset($code)) {
     // receive OAuth token object
-    $data = $instagram->getOAuthToken($code);
+    $data = $_SESSION['data'];
     $username = $data->user->username;
     // store user access token
     $instagram->setAccessToken($data);
