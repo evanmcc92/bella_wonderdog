@@ -79,14 +79,16 @@ if (isset($code)) {
 						echo $content . '</li></ul>';
 						foreach ($media->tags as $tag) {
 							echo "$tag";
-							$tagnewmedia = $instagram->getTagMedia($tag);
+							$tagnewmedia = $instagram->getTagMedia($tag,25);
 							$x = 0;
 							foreach ($tagmedia->data as $tagmedia) {
-								$mediaid = $tagmedia->id;
-								echo "$mediaid<br>";
 								$x++;
-								if ($x >= 25) {
+								if ($x == 25) {
 									break;
+								} else {
+									print_r($tagmedia);
+									$mediaid = $tagmedia->id;
+									echo "$mediaid<br>";
 								}
 							}
 							echo "<pre>";
