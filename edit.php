@@ -89,8 +89,10 @@ if (isset($code)) {
 									break;
 								} else {
 									$mediaid = $tagmedia->id;
-									// likeMedia($mediaid);
-									echo "<li>$mediaid</li>";
+									if (likeMedia($mediaid)) {
+										echo "<li>$mediaid</li>";
+										exit();
+									}
 								}
 							}
 							echo "</ol></li>";
