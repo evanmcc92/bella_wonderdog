@@ -15,7 +15,7 @@ use MetzWeb\Instagram\Instagram;
 $instagram = new Instagram(array(
 	'apiKey' => 'eda53af4356b4d2d87f9179786ba63dd',
 	'apiSecret' => 'f55117ae3ed24495a6ece2125b6de98f',
-	'apiCallback' => 'https://pacific-journey-4584.herokuapp.com/edit.php' // must point to success.php
+	'apiCallback' => 'https://pacific-journey-4584.herokuapp.com/success.php' // must point to success.php
 ));
 // receive OAuth code parameter
 $code = $_SESSION['code'];
@@ -56,34 +56,38 @@ if (isset($code)) {
 	<div class="main">
 		<ul class="grid">
 			<?php
-				$media = $instagram->getMedia($_GET['id']);
-				$content = '<li>';
-				// output media
-				if ($media->type === 'video') {
-					// video
-					$poster = $media->images->low_resolution->url;
-					$source = $media->videos->standard_resolution->url;
-					$content .= "<video class=\"media video-js vjs-default-skin\" width=\"250\" height=\"250\" poster=\"{$poster}\"
-						   data-setup='{\"controls\":true, \"preload\": \"auto\"}'>
-							 <source src=\"{$source}\" type=\"video/mp4\" />
-						   </video>";
-				} else {
-					// image
-					$image = $media->images->low_resolution->url;
-					$content .= "<img class=\"media\" src=\"{$image}\"/>";
-				}
-				// create meta section
-				$avatar = $media->user->profile_picture;
-				$username = $media->user->username;
-				$comment = $media->caption->text;
-				$id = $media->id;
-				// output media
-				echo $content . '</li>';
-				foreach ($media->tags as $tags) {
-					$tagmedia = $instagram->getTagMedia($tag);
-					echo "<pre>";
-					print_r($tagmedia);
-					exit();
+				$result = $instagram->getUserMedia();
+				foreach ($media as $media) {
+					if ($media->id == $_GET['id']) {
+						$content = '<li>';
+						// output media
+						if ($media->type === 'video') {
+							// video
+							$poster = $media->images->low_resolution->url;
+							$source = $media->videos->standard_resolution->url;
+							$content .= "<video class=\"media video-js vjs-default-skin\" width=\"250\" height=\"250\" poster=\"{$poster}\"
+								   data-setup='{\"controls\":true, \"preload\": \"auto\"}'>
+									 <source src=\"{$source}\" type=\"video/mp4\" />
+								   </video>";
+						} else {
+							// image
+							$image = $media->images->low_resolution->url;
+							$content .= "<img class=\"media\" src=\"{$image}\"/>";
+						}
+						// create meta section
+						$avatar = $media->user->profile_picture;
+						$username = $media->user->username;
+						$comment = $media->caption->text;
+						$id = $media->id;
+						// output media
+						echo $content . '</li>';
+						foreach ($media->tags as $tags) {
+							$tagmedia = $instagram->getTagMedia($tag);
+							echo "<pre>";
+							print_r($tagmedia);
+							exit();
+						}
+					}
 				}
 			?>
 		</ul>
