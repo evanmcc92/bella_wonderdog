@@ -57,7 +57,7 @@ if (isset($code)) {
 		<ul class="grid">
 			<?php
 				$result = $instagram->getUserMedia();
-				foreach ($media as $media) {
+				foreach ($result as $media) {
 					if ($media->id == $_GET['id']) {
 						$content = '<li>';
 						// output media
