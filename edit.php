@@ -28,6 +28,7 @@ if (isset($code)) {
 	// store user access token
 	$instagram->setAccessToken($data);
 	$result = $instagram->getUserMedia();
+					print_r($result);
 	// now you have access to all authenticated user methods
 } else {
 	// check whether an error occurred
