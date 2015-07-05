@@ -27,11 +27,12 @@ if (isset($code)) {
 	$username = $data->user->username;
 	// store user access token
 	$instagram->setAccessToken($data);
+	$result = $instagram->getUserMedia();
 	// now you have access to all authenticated user methods
 } else {
 	// check whether an error occurred
 	if (isset($_SESSION['error'])) {
-		echo 'An error occurred: ' . $_SESSION['error_description'];
+		die 'An error occurred: ' . $_SESSION['error_description'];
 	}
 }
 
@@ -56,9 +57,10 @@ if (isset($code)) {
 	<div class="main">
 		<ul class="grid">
 			<?php
-				$result = $instagram->getUserMedia();
 				foreach ($result as $media) {
-					if ($media->id == $_GET['id']) {
+					$id = $media->id;
+					echo "$id == ".$_GET['id']."<br>";
+					if ($id == $_GET['id']) {
 						$content = '<li>';
 						// output media
 						if ($media->type === 'video') {
@@ -74,11 +76,6 @@ if (isset($code)) {
 							$image = $media->images->low_resolution->url;
 							$content .= "<img class=\"media\" src=\"{$image}\"/>";
 						}
-						// create meta section
-						$avatar = $media->user->profile_picture;
-						$username = $media->user->username;
-						$comment = $media->caption->text;
-						$id = $media->id;
 						// output media
 						echo $content . '</li>';
 						foreach ($media->tags as $tags) {
