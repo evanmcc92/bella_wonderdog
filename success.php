@@ -60,6 +60,9 @@ if (isset($code)) {
             <?php
             // display all user likes
             foreach ($result->data as $media) {
+                echo "<pre>";
+                print_r($media);
+                exit();
                 $content = '<li>';
                 // output media
                 if ($media->type === 'video') {
