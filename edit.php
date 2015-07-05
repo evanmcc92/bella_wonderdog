@@ -121,12 +121,12 @@ if (isset($code)) {
 									// output media
 									echo $content . '</li>';
 									// sleep(rand(15,30));
-									exit();
+									break;
 								}
 							}
-							sleep(10);
+							// sleep(10);
 							echo "</ul></li>";
-							exit();
+							break;
 						}
 						echo "</ol>";
 					}
