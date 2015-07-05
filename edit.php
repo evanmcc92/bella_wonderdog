@@ -17,8 +17,6 @@ $instagram = new Instagram(array(
     'apiSecret' => 'f55117ae3ed24495a6ece2125b6de98f',
     'apiCallback' => 'https://pacific-journey-4584.herokuapp.com/success.php' // must point to success.php
 ));
-print_r($_SESSION);
-exit();
 // receive OAuth code parameter
 $code = $_SESSION['code'];
 
@@ -27,6 +25,8 @@ if (isset($code)) {
     // receive OAuth token object
     $data = $instagram->getOAuthToken($code);
     $username = $data->user->username;
+print_r($data);
+exit();
     // store user access token
     $instagram->setAccessToken($data);
     // now you have access to all authenticated user methods
