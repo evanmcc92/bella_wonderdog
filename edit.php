@@ -57,8 +57,7 @@ if (isset($code)) {
     <div class="main">
         <ul class="grid">
             <?php
-            // display all user likes
-            foreach ($result->data as $media) {
+                $media = $instagram->getMedia($_GET['id']);
                 $content = '<li>';
                 // output media
                 if ($media->type === 'video') {
@@ -85,9 +84,14 @@ if (isset($code)) {
                            <div class=\"comment\">{$comment}</div>
                            <div><a href='edit.php?id=$id'>Edit</a></div>
                          </div>";
+                foreach ($media->tags as $tags) {
+                    $tagmedia = $instagram->getTagMedia($tag);
+                    echo "<pre>";
+                    print_r($tagmedia);
+                    exit();
+                }
                 // output media
                 echo $content . '</li>';
-            }
             ?>
         </ul>
         <!-- GitHub project -->
