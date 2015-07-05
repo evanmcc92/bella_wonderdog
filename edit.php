@@ -81,7 +81,7 @@ if (isset($code)) {
 							echo "$tag";
 							$tagnewmedia = $instagram->getTagMedia($tag);
 							$x = 0;
-							foreach ($tagmedia->data as $tagmedia) {
+							foreach ($tagnewmedia->data as $tagmedia) {
 								$x++;
 								if ($x == 25) {
 									break;
