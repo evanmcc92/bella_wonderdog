@@ -15,7 +15,7 @@ use MetzWeb\Instagram\Instagram;
 $instagram = new Instagram(array(
 	'apiKey' => 'eda53af4356b4d2d87f9179786ba63dd',
 	'apiSecret' => 'f55117ae3ed24495a6ece2125b6de98f',
-	'apiCallback' => 'https://pacific-journey-4584.herokuapp.com/success.php' // must point to success.php
+	'apiCallback' => 'https://pacific-journey-4584.herokuapp.com/edit.php' // must point to success.php
 ));
 // receive OAuth code parameter
 $code = $_SESSION['code'];
@@ -32,7 +32,7 @@ if (isset($code)) {
 } else {
 	// check whether an error occurred
 	if (isset($_SESSION['error'])) {
-		die 'An error occurred: ' . $_SESSION['error_description'];
+		die('An error occurred: ' . $_SESSION['error_description']);
 	}
 }
 

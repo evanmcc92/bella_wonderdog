@@ -37,7 +37,7 @@ if (isset($code)) {
 	if (isset($_GET['error'])) {
 		$_SESSION['error'] = $_GET['error'];
 		$_SESSION['error_description'] = $_GET['error_description'];
-		die 'An error occurred: ' . $_GET['error_description'];
+		die('An error occurred: ' . $_GET['error_description']);
 	}
 }
 
