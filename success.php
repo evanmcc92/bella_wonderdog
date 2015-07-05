@@ -27,6 +27,8 @@ if (isset($code)) {
     // receive OAuth token object
     $data = $instagram->getOAuthToken($code);
     $username = $data->user->username;
+print_r($data);
+exit();
     // store user access token
     $instagram->setAccessToken($data);
     // now you have access to all authenticated user methods
