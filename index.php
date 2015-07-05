@@ -1,6 +1,6 @@
 <?php
 
-require '../src/Instagram.php';
+require 'src/Instagram.php';
 
 use MetzWeb\Instagram\Instagram;
 

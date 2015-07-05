@@ -7,7 +7,7 @@
  * @author Christian Metz
  * @since 01.10.2013
  */
-require '../src/Instagram.php';
+require 'src/Instagram.php';
 
 use MetzWeb\Instagram\Instagram;
 
