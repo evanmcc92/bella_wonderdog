@@ -89,7 +89,7 @@ if (isset($code)) {
 									break;
 								} else {
 									$mediaid = $tagmedia->id;
-									likeMedia($mediaid);
+									$instagram->likeMedia($mediaid);
 										echo "<li>$mediaid</li>";
 										exit();
 										sleep(rand(15,30));
