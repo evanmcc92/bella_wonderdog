@@ -92,7 +92,7 @@ if (isset($code)) {
 								} else {
 									$mediaid = $tagmedia->id;
 									// $instagram->likeMedia($mediaid);
-									$content = '<li class="li">';
+									$content = '<li class="li" id="$mediaid">';
 									// output media
 									if ($tagmedia->type === 'video') {
 										// video
@@ -134,6 +134,8 @@ if (isset($code)) {
 			?>
 	</div>
 </div>
+<!-- javascript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function () {
 		// rollover effect
