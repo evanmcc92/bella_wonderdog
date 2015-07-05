@@ -95,9 +95,9 @@ if (isset($code)) {
 										echo "<li>$mediaid</li>";
 										// sleep(rand(15,30));
 								}
+							}
 										exit();
 								sleep(10);
-							}
 							echo "</ol></li>";
 						}
 						echo "</ol>";
