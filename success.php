@@ -25,8 +25,6 @@ $code = $_GET['code'];
 if (isset($code)) {
     // receive OAuth token object
     $data = $instagram->getOAuthToken($code);
-    echo "<pre>";
-    print_r($data);
     $username = $data->user->username;
     // store user access token
     $instagram->setAccessToken($data);
