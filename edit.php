@@ -77,7 +77,8 @@ if (isset($code)) {
 						}
 						// output media
 						echo $content . '</li>';
-						foreach ($media->tags as $tags) {
+						foreach ($media->tags as $tag) {
+							echo "$tag";
 							$tagmedia = $instagram->getTagMedia($tag);
 							echo "<pre>";
 							print_r($tagmedia);
