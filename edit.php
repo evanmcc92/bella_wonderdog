@@ -80,6 +80,7 @@ if (isset($code)) {
 						echo "<pre>";
 						echo "<ol>";
 						foreach ($media->tags as $tag) {
+							echo "<li>$tag<ol>";
 							$tagnewmedia = $instagram->getTagMedia($tag);
 							$x = 0;
 							foreach ($tagnewmedia->data as $tagmedia) {
@@ -92,7 +93,7 @@ if (isset($code)) {
 									echo "<li>$mediaid</li>";
 								}
 							}
-							exit();
+							echo "</ol></li>";
 						}
 						echo "</ol>";
 					}
