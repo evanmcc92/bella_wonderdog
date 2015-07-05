@@ -8,7 +8,7 @@ use MetzWeb\Instagram\Instagram;
 $instagram = new Instagram(array(
     'apiKey' => 'eda53af4356b4d2d87f9179786ba63dd',
     'apiSecret' => 'f55117ae3ed24495a6ece2125b6de98f',
-    'apiCallback' => 'https://pacific-journey-4584.herokuapp.com/success.php' // must point to success.php
+    'apiCallback' => 'https://pacific-journey-4584.herokuapp.com/example/success.php' // must point to success.php
 ));
 
 // create login URL
