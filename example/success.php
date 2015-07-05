@@ -13,9 +13,9 @@ use MetzWeb\Instagram\Instagram;
 
 // initialize class
 $instagram = new Instagram(array(
-    'apiKey' => 'YOUR_APP_KEY',
-    'apiSecret' => 'YOUR_APP_SECRET',
-    'apiCallback' => 'YOUR_APP_CALLBACK' // must point to success.php
+    'apiKey' => 'eda53af4356b4d2d87f9179786ba63dd',
+    'apiSecret' => 'f55117ae3ed24495a6ece2125b6de98f',
+    'apiCallback' => 'https://pacific-journey-4584.herokuapp.com/example' // must point to success.php
 ));
 
 // receive OAuth code parameter
