@@ -88,7 +88,7 @@ if (isset($code)) {
 						   <div class=\"avatar\" style=\"background-image: url({$avatar})\"></div>
 						   <p>{$username}</p>
 						   <div class=\"comment\">{$comment}</div>
-						   <div><a href='edit.php?id=$id'>Edit</a></div>
+						   <div><a href='edit.php?id=$id'>Like Recent Hashtag Media</a></div>
 						 </div>";
 				// output media
 				echo $content . '</li>';

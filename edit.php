@@ -76,10 +76,19 @@ if (isset($code)) {
 							$content .= "<img class=\"media\" src=\"{$image}\"/>";
 						}
 						// output media
-						echo $content . '</li>';
+						echo $content . '</li></ul>';
 						foreach ($media->tags as $tag) {
 							echo "$tag";
-							$tagmedia = $instagram->getTagMedia($tag);
+							$tagnewmedia = $instagram->getTagMedia($tag);
+							$x = 0;
+							foreach ($tagmedia->data as $tagmedia) {
+								$mediaid = $tagmedia->id;
+								echo "$mediaid<br>";
+								$x++;
+								if ($x >= 25) {
+									break;
+								}
+							}
 							echo "<pre>";
 							print_r($tagmedia);
 							exit();
@@ -87,7 +96,6 @@ if (isset($code)) {
 					}
 				}
 			?>
-		</ul>
 	</div>
 </div>
 </body>
