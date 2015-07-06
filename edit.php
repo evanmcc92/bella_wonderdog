@@ -81,7 +81,7 @@ if (isset($code)) {
 						echo $content . '</li></ul>';
 						echo "<ol>";
 						$counttags = count($media->tags);
-						$limit = round(($counttags/100),0);
+						$limit = round((100/$counttags),0);
 						echo "limit $limit; counttags $counttags<br>";
 						foreach ($media->tags as $tag) {
 							echo "<li><h3 style='text-align:center'>$tag</h3><ul class=\"grid\">";
