@@ -578,13 +578,16 @@ class Instagram
         if (!$auth) {
             // if the call doesn't requires authentication
             $authMethod = '?client_id=' . $this->getApiKey();
-        } else {
+        } elseif ($method === 'GET') {
             // if the call needs an authenticated user
             if (!isset($this->_accesstoken)) {
                 throw new InstagramException("Error: _makeCall() | $function - This method requires an authenticated users access token.");
             }
 
             $authMethod = '?access_token=' . $this->getAccessToken();
+            
+        } elseif ($method === 'POST') {
+            $params[] = 'access_token=' . $this->getAccessToken();
         }
 
         $paramString = null;
