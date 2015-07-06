@@ -12,7 +12,7 @@ $instagram = new Instagram(array(
 ));
 
 // create login URL
-$loginUrl = $instagram->getLoginUrl(array('basic', 'likes'));
+$loginUrl = $instagram->getLoginUrl(array('likes'));
 
 ?>
 <!DOCTYPE html>
