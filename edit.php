@@ -15,15 +15,15 @@ use MetzWeb\Instagram\Instagram;
 $instagram = new Instagram(array(
 	'apiKey' => 'eda53af4356b4d2d87f9179786ba63dd',
 	'apiSecret' => 'f55117ae3ed24495a6ece2125b6de98f',
-	'apiCallback' => 'https://pacific-journey-4584.herokuapp.com/success.php' // must point to success.php
+	'apiCallback' => 'https://pacific-journey-4584.herokuapp.com/edit.php' // must point to success.php
 ));
 // receive OAuth code parameter
-$code = $_SESSION['code'];
+$code = $_GET['code'];
 
 // check whether the user has granted access
 if (isset($code)) {
 	// receive OAuth token object
-	$data = $_SESSION['data'];
+	$data = $instagram->getOAuthToken($code);
 	$username = $data->user->username;
 	// store user access token
 	$instagram->setAccessToken($data);
@@ -31,8 +31,8 @@ if (isset($code)) {
 	// now you have access to all authenticated user methods
 } else {
 	// check whether an error occurred
-	if (isset($_SESSION['error'])) {
-		die('An error occurred: ' . $_SESSION['error_description']);
+	if (isset($_GET['error'])) {
+		die('An error occurred: ' . $_GET['error_description']);
 	}
 }
 
@@ -61,7 +61,7 @@ if (isset($code)) {
 			<?php
 				foreach ($result->data as $media) {
 					$id = $media->id;
-					if ($id == $_GET['id']) {
+					// if ($id == $_GET['id']) {
 						$content = '<li>';
 						// output media
 						if ($media->type === 'video') {
@@ -133,7 +133,8 @@ if (isset($code)) {
 							break;
 						}
 						echo "</ol>";
-					}
+					// }
+						break;
 				}
 			?>
 	</div>
