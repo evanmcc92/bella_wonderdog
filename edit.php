@@ -24,6 +24,9 @@ $code = $_GET['code'];
 if (isset($code)) {
 	// receive OAuth token object
 	$data = $instagram->getOAuthToken($code);
+	echo "<pre>";
+	print_r($data);
+	echo "</pre>";
 	$username = $data->user->username;
 	// store user access token
 	$instagram->setAccessToken($data);
@@ -81,7 +84,7 @@ if (isset($code)) {
 						echo $content . '</li></ul>';
 						echo "<ol>";
 						$counttags = count($media->tags);
-						$limit = round((100/$counttags),0);
+						$limit = floor((100/$counttags));
 						echo "limit $limit; counttags $counttags<br>";
 						foreach ($media->tags as $tag) {
 							echo "<li><h3 style='text-align:center'>$tag</h3><ul class=\"grid\">";
