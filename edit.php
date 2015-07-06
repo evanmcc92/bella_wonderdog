@@ -90,37 +90,42 @@ if (isset($code)) {
 									break;
 								} else {
 									$mediaid = $tagmedia->id;
-									$instagram->likeMedia($mediaid);
-									$content = '<li class="li" id="'.$mediaid.'">';
-									// output media
-									if ($tagmedia->type === 'video') {
-										// video
-										$poster = $tagmedia->images->low_resolution->url;
-										$source = $tagmedia->videos->standard_resolution->url;
-										$content .= "<video class=\"media video-js vjs-default-skin\" width=\"250\" height=\"250\" poster=\"{$poster}\"
-												data-setup='{\"controls\":true, \"preload\": \"auto\"}'>
-													<source src=\"{$source}\" type=\"video/mp4\" />
-												</video>";
+									$likedresult = $instagram->likeMedia($mediaid);
+
+									if ($likedresult->meta->code === 200) {
+										$content = '<li class="li" id="'.$mediaid.'">';
+										// output media
+										if ($tagmedia->type === 'video') {
+											// video
+											$poster = $tagmedia->images->low_resolution->url;
+											$source = $tagmedia->videos->standard_resolution->url;
+											$content .= "<video class=\"media video-js vjs-default-skin\" width=\"250\" height=\"250\" poster=\"{$poster}\"
+													data-setup='{\"controls\":true, \"preload\": \"auto\"}'>
+														<source src=\"{$source}\" type=\"video/mp4\" />
+													</video>";
+										} else {
+											// image
+											$image = $tagmedia->images->low_resolution->url;
+											$content .= "<img class=\"media\" src=\"{$image}\"/>";
+										}
+										// create meta section
+										$avatar = $tagmedia->user->profile_picture;
+										$username = $tagmedia->user->username;
+										$comment = $tagmedia->caption->text;
+										$instagramlink = $tagmedia->link;
+										$content .= "<div class=\"content\">
+													<div class=\"avatar\" style=\"background-image: url({$avatar})\"></div>
+													<p>{$username}</p>
+													<div class=\"comment\">{$comment}</div>
+													<div><a href='$instagramlink' target='_blank'>Instagram Link</a></div>
+												</div>";
+										// output media
+										echo $content . '</li>';
+										// sleep(rand(15,30));
+										break;
 									} else {
-										// image
-										$image = $tagmedia->images->low_resolution->url;
-										$content .= "<img class=\"media\" src=\"{$image}\"/>";
+									  echo 'Something went wrong :(';
 									}
-									// create meta section
-									$avatar = $tagmedia->user->profile_picture;
-									$username = $tagmedia->user->username;
-									$comment = $tagmedia->caption->text;
-									$instagramlink = $tagmedia->link;
-									$content .= "<div class=\"content\">
-												<div class=\"avatar\" style=\"background-image: url({$avatar})\"></div>
-												<p>{$username}</p>
-												<div class=\"comment\">{$comment}</div>
-												<div><a href='$instagramlink' target='_blank'>Instagram Link</a></div>
-											</div>";
-									// output media
-									echo $content . '</li>';
-									// sleep(rand(15,30));
-									break;
 								}
 							}
 							// sleep(10);
