@@ -78,7 +78,7 @@ class Instagram
      *
      * @var array
      */
-    private $_actions = array('follow', 'unfollow', 'block', 'unblock', 'approve', 'deny');
+    private $_actions = array('follow', 'unfollow', 'block', 'unblock', 'approve', 'deny', 'likes');
 
     /**
      * Rate limit.
