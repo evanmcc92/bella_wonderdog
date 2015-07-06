@@ -120,7 +120,7 @@ class Instagram
      *
      * @throws \MetzWeb\Instagram\InstagramException
      */
-    public function getLoginUrl($scopes = array('likes'))
+    public function getLoginUrl($scopes = array('basic','likes'))
     {
         if (is_array($scopes) && count(array_intersect($scopes, $this->_scopes)) === count($scopes)) {
             return self::API_OAUTH_URL . '?client_id=' . $this->getApiKey() . '&redirect_uri=' . urlencode($this->getApiCallback()) . '&scope=' . implode('+',
