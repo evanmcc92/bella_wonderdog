@@ -38,7 +38,6 @@ $likes = $instagram->getUserLikes();
 echo '<pre>';
 print_r($likes);
 echo '<pre>';
-exit();
 	$result = $instagram->getUserMedia();
 } else {
 	// check whether an error occurred
