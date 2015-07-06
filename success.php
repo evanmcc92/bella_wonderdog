@@ -37,7 +37,7 @@ $likes = $instagram->getUserLikes();
 // take a look at the API response
 echo '<pre>';
 print_r($likes);
-echo '<pre>';
+echo '</pre>';
 	$result = $instagram->getUserMedia();
 } else {
 	// check whether an error occurred
