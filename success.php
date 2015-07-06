@@ -31,6 +31,14 @@ if (isset($code)) {
 	// store user access token
 	$instagram->setAccessToken($data);
 	// now you have access to all authenticated user methods
+	// get all user likes
+$likes = $instagram->getUserLikes();
+
+// take a look at the API response
+echo '<pre>';
+print_r($likes);
+echo '<pre>';
+exit();
 	$result = $instagram->getUserMedia();
 } else {
 	// check whether an error occurred
