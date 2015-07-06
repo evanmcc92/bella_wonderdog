@@ -81,7 +81,7 @@ if (isset($code)) {
 						echo $content . '</li></ul>';
 						echo "<ol>";
 						foreach ($media->tags as $tag) {
-							echo "<li>$tag<ul class=\"grid\">";
+							echo "<li><h3 style='text-align:center'>$tag<ul class=\"grid\">";
 							$tagnewmedia = $instagram->getTagMedia($tag);
 							$x = 0;
 							foreach ($tagnewmedia->data as $tagmedia) {
@@ -90,7 +90,7 @@ if (isset($code)) {
 									break;
 								} else {
 									$mediaid = $tagmedia->id;
-									// $instagram->likeMedia($mediaid);
+									$instagram->likeMedia($mediaid);
 									$content = '<li class="li" id="'.$mediaid.'">';
 									// output media
 									if ($tagmedia->type === 'video') {
