@@ -79,7 +79,6 @@ if (isset($code)) {
 						}
 						// output media
 						echo $content . '</li></ul>';
-						echo "<pre>";
 						echo "<ol>";
 						foreach ($media->tags as $tag) {
 							echo "<li>$tag<ul class=\"grid\">";
@@ -92,7 +91,7 @@ if (isset($code)) {
 								} else {
 									$mediaid = $tagmedia->id;
 									// $instagram->likeMedia($mediaid);
-									$content = '<li class="li" id="$mediaid">';
+									$content = '<li class="li" id="'.$mediaid.'">';
 									// output media
 									if ($tagmedia->type === 'video') {
 										// video
@@ -116,7 +115,7 @@ if (isset($code)) {
 												<div class=\"avatar\" style=\"background-image: url({$avatar})\"></div>
 												<p>{$username}</p>
 												<div class=\"comment\">{$comment}</div>
-												<div><a href='$instagramlink'>Instagram Link</a></div>
+												<div><a href='$instagramlink' target='_blank'>Instagram Link</a></div>
 											</div>";
 									// output media
 									echo $content . '</li>';
