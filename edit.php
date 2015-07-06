@@ -127,7 +127,7 @@ if (isset($code)) {
 										// sleep(rand(15,30));
 										break;
 									} else {
-									  echo '<li><pre>'.print_r($likedresult->meta).'</pre></li>';
+									  echo '<pre>'.print_r($likedresult->meta).'</pre>';
 									}
 								}
 							}
