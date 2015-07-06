@@ -24,7 +24,7 @@ class Instagram
     /**
      * The API OAuth URL.
      */
-    const API_OAUTH_URL = 'https://api.instagram.com/oauth/authorize';
+    const API_OAUTH_URL = 'https://instagram.com/oauth/authorize/';
 
     /**
      * The OAuth token URL.
