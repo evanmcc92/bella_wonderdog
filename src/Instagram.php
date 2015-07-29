@@ -397,7 +397,8 @@ class Instagram
      */
     public function getMediaLikes($id)
     {
-        return $this->_makeCall('media/' . $id . '/likes', true);
+
+        return $this->_makeCall('media/' . $id . '/likes', false);
     }
 
     /**
@@ -601,7 +602,6 @@ class Instagram
         if ($this->_signedheader && 'GET' !== $method) {
             $headerData[] = 'X-Insta-Forwarded-For: ' . $this->_signHeader();
         }
-
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $apiCall);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headerData);

@@ -1,0 +1,39 @@
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    margin: 25px;
+}
+nav li {
+    display: inline;
+    margin: 0 25px;
+}
+table {
+	text-align:center;
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+.good {
+	color: ForestGreen;
+}
+.bad {
+	color: #CC0000;
+}
+.specificData {
+	width:75%;
+	margin-bottom: 2%;
+	margin-right: auto;
+	margin-left: auto;
+}
+.tableMedia {
+	float: none;
+}
+.specificData tr:hover {
+	background-color: grey;
+	color: white;
+}
+#chart_div {
+	position: relative;
+	display: inline-block;
+	margin: 0 auto;
+}

@@ -19,11 +19,12 @@
 			"Type" => $row['Type']
 		);
 	}
-	function sortByLike($a, $b) {
-	    return $b['LikeCount'] - $a['LikeCount'];
-	}
-	function sortByComment($a, $b) {
-	    return $b['CommentCount'] - $a['CommentCount'];
+	$followerchange = (isset($user[1])) ? ($user[0]['NoFollowers'] - $user[1]['NoFollowers']) : 0;
+	$followerclass = className($followerchange);
+	$followingchange = (isset($user[1])) ? ($user[0]['NoFollowing'] - $user[1]['NoFollowing']) : 0;
+	$followingclass = className($followingchange);
+	function sortByID($a, $b) {
+	    return $b['ID'] - $a['ID'];
 	}
 	function className($value) {
 		if ($value > 0) {
@@ -35,10 +36,6 @@
 		}
 		return $return;
 	}
-	$followerchange = (isset($user[1])) ? ($user[0]['NoFollowers'] - $user[1]['NoFollowers']) : 0;
-	$followerclass = className($followerchange);
-	$followingchange = (isset($user[1])) ? ($user[0]['NoFollowing'] - $user[1]['NoFollowing']) : 0;
-	$followingclass = className($followingchange);
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,8 +45,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://vjs.zencdn.net/4.2/video-js.css" rel="stylesheet">
 	<link href="assets/style.css" rel="stylesheet">
-	<link href="assets/main.css" rel="stylesheet">
 	<script src="https://vjs.zencdn.net/4.2/video.js"></script>
+	<link href="assets/main.css" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
@@ -64,7 +61,7 @@
 					<li><a href="tags.php">Most Popular Tags Used</a></li>
 				</ul>
 			</nav>
-			<article id="userdata" style="text-align:center">
+			<article id="userdata">
 				<table>
 					<tr>
 						<th>Followers</th>
@@ -92,11 +89,11 @@
 		</header>
 		<article id="postdata">
 			<section id="likes">
-				<h1>Top 5 Posts with the most Likes</h1>
+				<h1>All Posts</h1>
 				<div class="main">
 					<ul class="grid">
 						<?php
-							usort($post, 'sortByLike');
+							usort($post, 'sortByID');
 							$i = 0;
 							foreach ($post as $id => $value) {
 								$content = "<li>";
@@ -115,55 +112,15 @@
 								$avatar = $user[0]['ProfilePictureURL'];
 								$username = $user[0]['Username'];
 								$likecount = $value['LikeCount'];
+								$commentcount = $value['CommentCount'];
 								$content .= "
 								<div class=\"content\">
 									<div class='comments'><p>{$likecount} Likes</p></div>
+									<div class='comments'><p>{$commentcount} Comments</p></div>
 									<div class='comments'><p><a href='post.php?id=".$value['ID']."'>See Full Image Here</a></p></div>
 								</div>";
 								echo "$content</li>";
 								$i++;
-								if ($i == 5) {
-									break;
-								}
-							}
-						?>
-					</ul>
-				</div>
-			</section>
-			<section id="comments">
-				<h1>Top 5 Posts with the most Comments</h1>
-				<div class="main">
-					<ul class="grid">
-						<?php
-							usort($post, 'sortByComment');
-							$i = 0;
-							foreach ($post as $id => $value) {
-								$content = "<li>";
-								if ($value['Type'] === 'video') {
-									$poster = $value['ImageLowResolution'];
-									$source = $value['VideoStandardResolution'];
-									$content .= "
-									<video class=\"media video-js vjs-default-skin\" width=\"250\" height=\"250\" poster=\"{$poster}\" data-setup='{\"controls\":true, \"preload\": \"auto\"}'>
-										<source src=\"{$source}\" type=\"video/mp4\" />
-									</video>";
-								} else {
-									$image = $value['ImageLowResolution'];
-									$content .= "<img class=\"media\" src=\"{$image}\"/>";
-								}
-								// create meta section
-								$avatar = $user[0]['ProfilePictureURL'];
-								$username = $user[0]['Username'];
-								$commentcount = $value['CommentCount'];
-								$content .= "
-								<div class=\"content\">
-									<div class='comments'><p>{$commentcount} Comments</p></div>
-									<div class='comments'><p><a href='post.php?id=$id'>See Full Post Here</a></p></div>
-								</div>";
-								echo "$content</li>";
-								$i++;
-								if ($i == 5) {
-									break;
-								}
 							}
 						?>
 					</ul>
