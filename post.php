@@ -1,34 +1,20 @@
 <?php
-	$con = mysqli_connect('localhost', 'root', 'evan6992', 'bella_wonderdog') or die("Cannot Connect to MySQL: ".mysqli_connect_error());
-	$selectUser = "SELECT * FROM UserData ORDER BY Created_at DESC LIMIT 2";
-	$userResult = mysqli_query($con, $selectUser) or die("Error gettings user data: ".mysqli_error($con)."<br>$selectUser");
-	while($row = mysqli_fetch_array($userResult)){
-		$user[] = $row;
-	}
-	$followerchange = (isset($user[1])) ? ($user[0]['NoFollowers'] - $user[1]['NoFollowers']) : 0;
-	$followerclass = className($followerchange);
-	$followingchange = (isset($user[1])) ? ($user[0]['NoFollowing'] - $user[1]['NoFollowing']) : 0;
-	$followingclass = className($followingchange);
+	require_once 'header.php';
 	$jsonOut = getJSONOutput($con, $_GET['id']);
 
-	$selectPost = "SELECT * FROM `Posts` WHERE IG_PostID = '".$_GET['id']."' ORDER BY Created_at DESC";
+	$selectPost = "SELECT a.IG_PostID, b.Created_at, a.Link, a.ImageLowResolution, a.VideoStandardResolution, a.CaptionText, a.Filter, a.Type, a.IG_Created_at, b.TagCount, b.CommentCount, b.LikeCount, b.UsersInPhoto
+		FROM `Posts` as a, PostData as b
+		WHERE a.IG_PostID = b.IG_PostID AND a.IG_PostID = '".$_GET['id']."'
+		ORDER BY b.Created_at DESC
+	";
 	$postResult = mysqli_query($con, $selectPost) or die("Error gettings post data: ".mysqli_error($con)."<br>$selectPost");
 	while($row = mysqli_fetch_array($postResult)){
 		$post[] = $row;
 	}
 
-	function className($value) {
-		if ($value > 0) {
-			$return = "good";
-		} elseif ($value < 0) {
-			$return = "bad";
-		} else {
-			$return = "";
-		}
-		return $return;
-	}
 	function getJSONOutput($con, $postid){
-		$selectUser = "SELECT * FROM Posts WHERE IG_PostID = '$postid' ORDER BY Created_at DESC";
+		$selectUser = "SELECT CommentCount, LikeCount, Created_at FROM PostData
+		 WHERE IG_PostID = '$postid' ORDER BY Created_at DESC";
 		$userResult = mysqli_query($con, $selectUser) or die("Error gettings user data: ".mysqli_error($con)."<br>$selectUser");
 		$out['cols'] = array(
 			array(
@@ -49,19 +35,21 @@
 		);
 		$x = 0;
 		while($row = mysqli_fetch_array($userResult)){
-			$year = date("Y", strtotime($row['Created_at']));
-			$month = date("m", strtotime($row['Created_at'])) - 1;
-			$day = date("d", strtotime($row['Created_at']));
-			$hour = date("H", strtotime($row['Created_at']));
-			$minutes = date("i", strtotime($row['Created_at']));
-			$seconds = date("s", strtotime($row['Created_at']));
-			
-			$user = array();
-			$user[] = array("v"=>"Date($year, $month, $day, $hour, $minutes, $seconds)");
-			$user[] = array("v"=>intval($row['CommentCount']));
-			$user[] = array("v"=>floatval($row['LikeCount']));
-			$rows[$x] = array("c"=>$user);
-			$x++;
+			if (isset($row['Created_at'])) {
+				$year = date("Y", strtotime($row['Created_at']));
+				$month = date("m", strtotime($row['Created_at'])) - 1;
+				$day = date("d", strtotime($row['Created_at']));
+				$hour = date("H", strtotime($row['Created_at']));
+				$minutes = date("i", strtotime($row['Created_at']));
+				$seconds = date("s", strtotime($row['Created_at']));
+				
+				$user = array();
+				$user[] = array("v"=>"Date($year, $month, $day, $hour, $minutes, $seconds)");
+				$user[] = array("v"=>intval($row['CommentCount']));
+				$user[] = array("v"=>floatval($row['LikeCount']));
+				$rows[$x] = array("c"=>$user);
+				$x++;
+			}
 		}
 		$out['rows'] = $rows;
 		return json_encode($out);
@@ -142,6 +130,7 @@
 					</tr>
 					<tr>
 						<td colspan="2" style="text-align:center"><form action="updateData.php" method="post"><input type="submit" name="submit" value="Get Fresh Data"></form></td>
+						<!-- <td colspan="2" style="text-align:center"><form action="updateData.php" method="post"><input type="submit" name="submit" value="Get Fresh Data"></form></td> -->
 					</tr>
 				</table>
 			</article>
@@ -153,6 +142,7 @@
 					<col style="width:20%">
 					<col style="width:80%">
 				</colgroup>
+
 				<?php
 					if ($post[0]['Type'] === "video") {
 						$poster = $post[0]['ImageLowResolution'];

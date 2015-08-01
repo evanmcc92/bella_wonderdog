@@ -1,12 +1,12 @@
 <?php
-	$con = mysqli_connect('localhost', 'root', 'evan6992', 'bella_wonderdog') or die("Cannot Connect to MySQL: ".mysqli_connect_error());
-	$selectUser = "SELECT * FROM UserData ORDER BY Created_at DESC LIMIT 2";
-	$userResult = mysqli_query($con, $selectUser) or die("Error gettings user data: ".mysqli_error($con)."<br>$selectUser");
-	while($row = mysqli_fetch_array($userResult)){
-		$user[] = $row;
-	}
+	
+	require_once 'header.php';
 
-	$selectPost = "SELECT * FROM `Posts` WHERE Created_at in (SELECT MAX(Created_at) from Posts GROUP BY IG_PostID);";
+	$selectPost = "SELECT a.IG_PostID, b.Created_at, b.CommentCount, b.LikeCount, a.ImageLowResolution, a.VideoStandardResolution, a.Type
+		FROM `Posts` as a, PostData as b 
+		WHERE a.IG_PostID = b.IG_PostID 
+		ORDER BY `a`.`IG_Created_at` DESC
+	";
 	$postResult = mysqli_query($con, $selectPost) or die("Error gettings post data: ".mysqli_error($con)."<br>$selectPost");
 	while($row = mysqli_fetch_array($postResult)){
 		$post[$row['IG_PostID']] = array(
@@ -19,22 +19,8 @@
 			"Type" => $row['Type']
 		);
 	}
-	$followerchange = (isset($user[1])) ? ($user[0]['NoFollowers'] - $user[1]['NoFollowers']) : 0;
-	$followerclass = className($followerchange);
-	$followingchange = (isset($user[1])) ? ($user[0]['NoFollowing'] - $user[1]['NoFollowing']) : 0;
-	$followingclass = className($followingchange);
 	function sortByID($a, $b) {
 	    return $b['ID'] - $a['ID'];
-	}
-	function className($value) {
-		if ($value > 0) {
-			$return = "good";
-		} elseif ($value < 0) {
-			$return = "bad";
-		} else {
-			$return = "";
-		}
-		return $return;
 	}
 ?>
 <!DOCTYPE html>
@@ -93,7 +79,7 @@
 				<div class="main">
 					<ul class="grid">
 						<?php
-							usort($post, 'sortByID');
+							// usort($post, 'sortByID');
 							$i = 0;
 							foreach ($post as $id => $value) {
 								$content = "<li>";

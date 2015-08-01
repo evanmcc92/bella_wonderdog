@@ -1,30 +1,10 @@
 <?php
-	$con = mysqli_connect('localhost', 'root', 'evan6992', 'bella_wonderdog') or die("Cannot Connect to MySQL: ".mysqli_connect_error());
-	$selectUser = "SELECT * FROM UserData ORDER BY Created_at DESC LIMIT 2";
-	$userResult = mysqli_query($con, $selectUser) or die("Error gettings user data: ".mysqli_error($con)."<br>$selectUser");
-	while($row = mysqli_fetch_array($userResult)){
-		$user[] = $row;
-	}
-	$followerchange = (isset($user[1])) ? ($user[0]['NoFollowers'] - $user[1]['NoFollowers']) : 0;
-	$followerclass = className($followerchange);
-	$followingchange = (isset($user[1])) ? ($user[0]['NoFollowing'] - $user[1]['NoFollowing']) : 0;
-	$followingclass = className($followingchange);
+	require_once 'header.php';
 
 	$selectPost = "SELECT Tag, COUNT(ID) as `Count` FROM `Tags` GROUP BY Tag ORDER BY `Count` DESC";
 	$postResult = mysqli_query($con, $selectPost) or die("Error gettings post data: ".mysqli_error($con)."<br>$selectPost");
 	while($row = mysqli_fetch_array($postResult)){
 		$tag[] = $row;
-	}
-
-	function className($value) {
-		if ($value > 0) {
-			$return = "good";
-		} elseif ($value < 0) {
-			$return = "bad";
-		} else {
-			$return = "";
-		}
-		return $return;
 	}
 ?>
 <!DOCTYPE html>
@@ -73,6 +53,7 @@
 					</tr>
 					<tr>
 						<td colspan="2" style="text-align:center"><form action="updateData.php" method="post"><input type="submit" name="submit" value="Get Fresh Data"></form></td>
+						<!-- <td colspan="2" style="text-align:center"><form action="updateData.php" method="post"><input type="submit" name="submit" value="Get Fresh Data"></form></td> -->
 					</tr>
 				</table>
 			</article>

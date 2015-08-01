@@ -1,30 +1,10 @@
 <?php
-	$con = mysqli_connect('localhost', 'root', 'evan6992', 'bella_wonderdog') or die("Cannot Connect to MySQL: ".mysqli_connect_error());
-	$selectUser = "SELECT * FROM UserData ORDER BY Created_at DESC LIMIT 2";
-	$userResult = mysqli_query($con, $selectUser) or die("Error gettings user data: ".mysqli_error($con)."<br>$selectUser");
-	while($row = mysqli_fetch_array($userResult)){
-		$user[] = $row;
-	}
-	$followerchange = (isset($user[1])) ? ($user[0]['NoFollowers'] - $user[1]['NoFollowers']) : 0;
-	$followerclass = className($followerchange);
-	$followingchange = (isset($user[1])) ? ($user[0]['NoFollowing'] - $user[1]['NoFollowing']) : 0;
-	$followingclass = className($followingchange);
+	require_once 'header.php';
 
 	$selectPost = "SELECT UserID, UserName, FullName, COUNT(ID) as `Count` FROM `LikeUsers` GROUP BY UserID ORDER BY `Count` DESC LIMIT 100";
 	$postResult = mysqli_query($con, $selectPost) or die("Error gettings post data: ".mysqli_error($con)."<br>$selectPost");
 	while($row = mysqli_fetch_array($postResult)){
 		$fans[] = $row;
-	}
-
-	function className($value) {
-		if ($value > 0) {
-			$return = "good";
-		} elseif ($value < 0) {
-			$return = "bad";
-		} else {
-			$return = "";
-		}
-		return $return;
 	}
 ?>
 <!DOCTYPE html>
