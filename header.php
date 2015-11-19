@@ -2,6 +2,16 @@
 ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
 error_reporting(-1);
+
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+print_r($url);
+
+$server = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$db = substr($url["path"], 1);
+
+$conn = new mysqli($server, $username, $password, $db);
 	$con = mysqli_connect('localhost', 'bella_wonderdog', 'emily1106', 'bella_wonderdog') or die("Cannot Connect to MySQL: ".mysqli_connect_error());
 	$userid = 1634434248;
 	$selectUser = "SELECT a.IG_UserID, a.Username, a.Bio, a.ProfilePictureURL, a.FullName, b.NoFollowers, b.NoFollowing, b.NoPosts, b.Created_at FROM User as a, UserData as b WHERE a.IG_UserID = b.IG_UserID ORDER BY b.Created_at DESC LIMIT 2";
